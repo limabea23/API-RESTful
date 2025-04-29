@@ -15,10 +15,10 @@ const getBrandById = async (id) => {
     return result.rows[0];
 };
 
-const createBrand = async (name, founder) => {
+const createBrand = async (name, founder, photo) => {
     const result = await pool.query(
-        "INSERT INTO brand (name, founder) VALUES ($1, $2) RETURNING *",
-        [name, founder]
+        "INSERT INTO brand (name, founder, photo) VALUES ($1, $2, $3) RETURNING *",
+        [name, founder, photo]
     );
     return result.rows[0];
 };

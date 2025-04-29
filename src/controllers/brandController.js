@@ -25,7 +25,8 @@ const getBrand = async (req, res) => {
 const createBrand = async (req, res) => {
     try {
         const { name, founder } = req.body;
-        const newBrand = await brandModel.createBrand(name, founder);
+        const photo = req.file ? req.file.filename : null;
+        const newBrand = await brandModel.createBrand(name, founder, photo);
         res.status(201).json(newBrand);
     } catch (error) {
 	console.log(error);
