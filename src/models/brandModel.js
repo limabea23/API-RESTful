@@ -1,8 +1,13 @@
 const pool = require("../config/database");
 
-const getAllBrands = async () => {
-    const result = await pool.query("SELECT * FROM brand");
-    return result.rows;
+const getAllBrands = async (name) => {
+    if(!name) {
+        const result = await pool.query(`SELECT * FROM brand`);
+        return result.rows;
+    } else {
+        const result = await pool.query(`SELECT * FROM brand WHERE name ILIKE $1`, [`%${name}%`]);
+        return result.rows;
+    }
 };
 
 const getBrandById = async (id) => {

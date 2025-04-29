@@ -2,16 +2,17 @@ const cosmeticModel = require("../models/cosmeticModel");
 
 const getAllCosmetics = async (req, res) => {
     try {
-        const cosmetics = await wizardModel.getAllCosmetics();
+        const { name } = req.query;
+        const cosmetics = await cosmeticModel.getAllCosmetic(name);
         res.json(cosmetics);
-    } catch (error) {
-        res.status(500).json({ message: "erro ao buscar cosméticos." });
+    } catch (error) { 
+        res.status(500).json({ message: "erro ao buscar cosmético." });
     }
 };
 
 const getCosmetic = async (req, res) => {
     try {
-        const cosmetics = await cosmeticsModel.getCosmeticsById(req.params.id);
+        const cosmetics = await cosmeticModel.getCosmeticsById(req.params.id);
         if (!cosmetics) {
             return res.status(404).json({ message: "cosmético não encontrado." });
         }

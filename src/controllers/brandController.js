@@ -2,11 +2,12 @@ const brandModel = require("../models/brandModel");
 
 const getAllBrands = async (req, res) => {
     try {
-        const brands = await brandModel.getAllBrands();
-        res.json(brands);
-    } catch (error) {
-        res.status(500).json({ message: "erro ao buscar marca." });
-    }
+            const { name } = req.query;
+            const brands = await brandModel.getAllBrands(name);
+            res.json(brands);
+        } catch (error) { 
+            res.status(500).json({ message: "erro ao buscar cosmético." });
+        }
 };
 
 const getBrand = async (req, res) => {

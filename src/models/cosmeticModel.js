@@ -1,12 +1,13 @@
 const pool = require("../config/database");
 
-const getAllCosmetics = async () => {
-    const result = await pool.query(
-        `SELECT cosmetic.*, brand.name AS brand_name 
-        FROM cosmetic 
-        LEFT JOIN brand ON Cosmetics.brand_id = brand.id`
-    );
-    return result.rows;
+const getAllCosmetics = async (name) => {
+    if(!name) {
+        const result = await pool.query(`SELECT * FROM cosmetic`);
+        return result.rows;
+    } else {
+        const result = await pool.query(`SELECT * FROM cosmetic WHERE name ILIKE $1`, [`%${name}%`]);
+        return result.rows;
+    }
 };
 
 const getCosmeticById = async (id) => {
@@ -30,7 +31,7 @@ const createCosmetic = async (name, category, price, description, brand_id) => {
 
 const updateCosmetic = async (id, name, category, price, description, brand_id) => {
     const result = await pool.query(
-    "UPDATE cosmetic SET name = $1, category = $2, price = $3, description = $4 brand_id = $5 WHERE id = $6 RETURNING *",
+    "UPDATE cosmetic SET name = $1, category = $2, price = $3, description = $4, brand_id = $5 WHERE id = $6 RETURNING *",
     [name, category, price, description, brand_id, id]
 );
 return result.rows[0];
