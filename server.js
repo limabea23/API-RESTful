@@ -2,7 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const brandRoutes = require("./src/routes/brandRoutes.js");
-const cosmeticRoutes = require("./src/routes/cosmetic.js");
+const cosmeticRoutes = require("./src/routes/cosmeticRoutes.js");
 const reportRoutes = require("./src/routes/reportRoutes.js");
 
 const app = express();

@@ -5,7 +5,7 @@ const cosmeticModel = require("../models/cosmeticModel");
 
 const exportCosmeticCSV = async (req, res) => {
     try {
-        const cosmetics =  await cosmeticModel.getCosmetic();
+        const cosmetics =  await cosmeticModel.getAllCosmetic();
 
         res.setHeader("Content-Disposition", "attachment; filename=cosmetic.csv");
         res.setHeader("Content-Type", "text-csv");
@@ -18,7 +18,7 @@ const exportCosmeticCSV = async (req, res) => {
                 Nome: cosmetic.name,
                 Categoria: cosmetic.category,
                 Preço: cosmetic.price,
-                Descrição: cosmetic.descripiton,
+                Descrição: cosmetic.descripton,
                 Marca: cosmetic.brand_id
             });
         });

@@ -1,6 +1,6 @@
 const pool = require("../config/database");
 
-const getAllCosmetics = async (name) => {
+const getAllCosmetic = async (name) => {
     if(!name) {
         const result = await pool.query(`SELECT * FROM cosmetic`);
         return result.rows;
@@ -50,4 +50,4 @@ const deleteCosmetic = async (id) => {
     return { message: "cosmético deletado com sucesso." };
 };
 
-module.exports = { getAllCosmetics, getCosmeticById, createCosmetic, updateCosmetic, deleteCosmetic };
+module.exports = { getAllCosmetic, getCosmeticById, createCosmetic, updateCosmetic, deleteCosmetic };
